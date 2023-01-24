@@ -1,2 +1,0 @@
-BBCLastByte:
-	db 0
