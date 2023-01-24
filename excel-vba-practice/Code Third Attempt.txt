@@ -1,0 +1,140 @@
+Sub AddHomeExpenses()
+    Dim MinDate As Date, MaxDate As Date
+    MinDate = Sheet6.Range("B4").Value
+    MaxDate = Sheet6.Range("B5").Value
+    Dim MinVal As Integer, MaxVal As Long
+    MinVal = Sheet6.Range("B2").Value
+    MaxVal = Sheet6.Range("B3").Value
+    Dim Str As String
+    With Sheet1
+    
+        Dim AvailRow As Long
+        Dim LastRow As Long
+        AvailRow = Sheet6.Range("E2000").End(xlUp).Row
+        LastRow = .Range("B2000").End(xlUp).Row
+        
+        For x = 2 To LastRow
+            If (.Range("B" & x).Value >= MinDate And .Range("B" & x).Value <= MaxDate) Then
+                Str = .Range("A" & x).Value
+                If InStr(Str, "Credit") > 0 Then
+                        AvailRow = Sheet6.Range("I200").End(xlUp).Row
+                        AvailRow = AvailRow + 1
+                        Sheet6.Range("I" & AvailRow).Value = .Range("A" & x).Value
+                        Sheet6.Range("J" & AvailRow).Value = .Range("B" & x).Value
+                        Sheet6.Range("K" & AvailRow).Value = .Range("C" & x).Value
+                
+                ElseIf (.Range("C" & x).Value >= MinVal And .Range("C" & x) <= MaxVal) Then
+                        AvailRow = Sheet6.Range("E2000").End(xlUp).Row
+                        AvailRow = AvailRow + 1
+                        Sheet6.Range("E" & AvailRow).Value = .Range("A" & x).Value
+                        Sheet6.Range("F" & AvailRow).Value = .Range("B" & x).Value
+                        Sheet6.Range("G" & AvailRow).Value = .Range("C" & x).Value
+                End If
+            End If
+            
+        Next x
+        
+    
+    End With
+End Sub
+
+Sub Add257Withdrawls()
+    Dim MinDate As Date, MaxDate As Date
+    MinDate = Sheet6.Range("B4").Value
+    MaxDate = Sheet6.Range("B5").Value
+    With Sheet5
+        Dim AvailRow As Long
+        Dim LastRow As Long
+        AvailRow = Sheet6.Range("E2000").End(xlUp).Row
+        LastRow = .Range("B2000").End(xlUp).Row
+        
+        For x = 1 To LastRow
+            If (.Range("B" & x).Value >= MinDate And .Range("B" & x).Value <= MaxDate) Then
+                AvailRow = AvailRow + 1
+                Sheet6.Range("E" & AvailRow).Value = .Range("A" & x).Value
+                Sheet6.Range("F" & AvailRow).Value = .Range("B" & x).Value
+                Sheet6.Range("G" & AvailRow).Value = .Range("C" & x).Value
+            End If
+        Next x
+    
+    End With
+    
+    
+End Sub
+
+Sub AddMaterial()
+    Dim MinDate As Date, MaxDate As Date
+    MinDate = Sheet6.Range("B4").Value
+    MaxDate = Sheet6.Range("B5").Value
+    With Sheet3
+        Dim AvailRow As Long
+        Dim LastRow As Long
+        AvailRow = Sheet6.Range("E2000").End(xlUp).Row
+        LastRow = .Range("B2000").End(xlUp).Row
+        
+        For x = 1 To LastRow
+            If (.Range("B" & x).Value >= MinDate And .Range("B" & x).Value <= MaxDate) Then
+                AvailRow = AvailRow + 1
+                Sheet6.Range("E" & AvailRow).Value = .Range("A" & x).Value
+                Sheet6.Range("F" & AvailRow).Value = .Range("B" & x).Value
+                Sheet6.Range("G" & AvailRow).Value = .Range("C" & x).Value
+
+                
+            End If
+        Next x
+    
+    End With
+    
+    
+End Sub
+
+Sub AddLabor()
+    Dim MinDate As Date, MaxDate As Date
+    MinDate = Sheet6.Range("B4").Value
+    MaxDate = Sheet6.Range("B5").Value
+    With Sheet4
+        Dim AvailRow As Long
+        Dim LastRow As Long
+        Dim Str As String
+        AvailRow = Sheet6.Range("E2000").End(xlUp).Row
+        LastRow = .Range("B2000").End(xlUp).Row
+        
+        For x = 1 To LastRow
+            If (.Range("B" & x).Value = Empty) Then
+                Str = .Range("A" & x).Value
+            End If
+            If (.Range("B" & x).Value >= MinDate And .Range("B" & x).Value <= MaxDate) Then
+                AvailRow = AvailRow + 1
+                
+                Sheet6.Range("E" & AvailRow).Value = Str + .Range("A" & x).Value
+                Sheet6.Range("F" & AvailRow).Value = .Range("B" & x).Value
+                Sheet6.Range("G" & AvailRow).Value = .Range("C" & x).Value
+            End If
+        Next x
+    
+    End With
+    
+    
+End Sub
+
+Sub DeleteRecord()
+    With Sheet6
+        Dim AvailRow As Long
+        
+        AvailRow = Sheet6.Range("E2000").End(xlUp).Row
+        
+        For x = 1 To AvailRow
+            
+            Sheet6.Range("E" & 1).Delete
+            Sheet6.Range("F" & 1).Delete
+            Sheet6.Range("G" & 1).Delete
+            Sheet6.Range("I" & 1).Delete
+            Sheet6.Range("J" & 1).Delete
+            Sheet6.Range("K" & 1).Delete
+            
+        Next x
+        Sheet6.Range("E" & 1).Delete
+    End With
+    
+    
+End Sub

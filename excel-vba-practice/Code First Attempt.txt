@@ -1,0 +1,138 @@
+Sub BricksDetails()
+Dim Rori As Long, Kutwai As Long, Awal As Long, Doom As Long, Khingar As Long
+Dim CountStart As Long, CountEnd As Long
+Dim MinDate As Date, MaxDate As Date
+Dim Row As Long, LastRow As Long, RowName As Long
+Dim Name As String
+
+With Sheet7
+
+    LastRow = .Range("A999").End(xlUp).Row
+    MinDate = Sheet2.Range("E26").Value
+    MaxDate = Sheet2.Range("F26").Value
+     
+    Khingar = 0
+    Awal = 0
+    Doom = 0
+    Kutwai = 0
+    Rori = 0
+    
+    For Row = 1 To LastRow
+        If MinDate <= MaxDate Then
+            If MinDate >= .Range("B" & Row).Value Then
+                CountStart = Row
+            End If
+            If MaxDate >= .Range("B" & Row).Value Then
+                CountEnd = Row
+            End If
+        End If
+    Next Row
+    
+    If CountStart <= CountEnd Then
+        CountStart = CountStart + 1
+        For RowName = CountStart To CountEnd
+            Name = CStr(.Range("A" & RowName).Value)
+            If InStr(Name, "K.") > 0 Then
+                Khingar = Khingar + CLng(Mid(Name, 5, 4))
+            End If
+            If InStr(Name, "A.") > 0 Then
+                Awal = Awal + CLng(Mid(Name, 6, 5))
+            End If
+            If InStr(Name, "Rori") > 0 Then
+                Rori = Rori + CLng(Mid(Name, 6, 1))
+            End If
+            If InStr(Name, "Kutwai") > 0 Then
+                Kutwai = Kutwai + .Range("C" & RowName).Value
+            End If
+            If InStr(Name, "Doom") > 0 Then
+                Doom = Doom + CLng(Mid(Name, 6, 5))
+            End If
+        Next RowName
+        
+        
+        Sheet2.Range("F31").Value = Awal
+        Sheet2.Range("F32").Value = Khingar
+        Sheet2.Range("F33").Value = Doom
+        Sheet2.Range("F34").Value = Kutwai
+        Sheet2.Range("F35").Value = Rori
+        
+    End If
+
+End With
+End Sub
+
+Sub Rait()
+
+    Dim LastRow As Long, Row As Long
+    Dim Rait As Long
+    Dim RowName As Long
+    Dim Name As String
+    
+    With Sheet9
+
+        LastRow = .Range("A999").End(xlUp).Row
+        MinDate = Sheet2.Range("E26").Value
+        MaxDate = Sheet2.Range("F26").Value
+        Rait = 0
+        
+        For Row = 1 To LastRow
+            If MinDate >= .Range("B" & Row).Value Then
+                CountStart = Row
+            End If
+            If MaxDate >= .Range("B" & Row).Value Then
+                CountEnd = Row
+            End If
+        Next Row
+        
+        CountStart = CountStart + 1
+        
+        For RowName = CountStart To CountEnd
+            Name = CStr(.Range("A" & RowName).Value)
+            If InStr(Name, "R.") > 0 Then
+                Rait = Rait + CLng(Left(Right(Name, 2), 1))
+            End If
+        Next RowName
+        
+        
+        Sheet2.Range("H33").Value = Rait
+        
+    End With
+End Sub
+
+Sub Cement()
+
+    Dim LastRow As Long, Row As Long
+    Dim Cement As Long
+    Dim RowName As Long
+    Dim Name As String
+    
+    With Sheet8
+
+        LastRow = .Range("A999").End(xlUp).Row
+        MinDate = Sheet2.Range("E26").Value
+        MaxDate = Sheet2.Range("F26").Value
+        Cement = 0
+        
+        For Row = 1 To LastRow
+            If MinDate >= .Range("B" & Row).Value Then
+                CountStart = Row
+            End If
+            If MaxDate >= .Range("B" & Row).Value Then
+                CountEnd = Row
+            End If
+        Next Row
+        
+        CountStart = CountStart + 1
+        For RowName = CountStart To CountEnd
+            Name = CStr(.Range("A" & RowName).Value)
+            If InStr(Name, "C.") > 0 Then
+                Cement = Cement + CLng(Mid(Left(Name, InStr(Name, "B.") - 1), 3, 3))
+            End If
+        Next RowName
+        
+        
+        Sheet2.Range("H31").Value = Cement
+        
+    End With
+End Sub
+
