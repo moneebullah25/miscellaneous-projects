@@ -1,0 +1,3 @@
+[submodule "6502-assembly"]
+    path = "6502-assembly"
+    url = "https://github.com/moneebullah25/miscellaneous-projects/6502-assembly.git"
