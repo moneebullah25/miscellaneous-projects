@@ -1,0 +1,50 @@
+// Javascript store all numbers using 64 bytes
+
+let str = "Muneeb";
+
+let intNr = 1;
+let decNr = 1.5;
+let expNr = 1.4e15;
+let octNr = 0o10; //decimal version would be 8
+let hexNr = 0x3E8; //decimal version would be 1000
+let binNr = 0b101; //decimal version would be 5
+
+let bigNr = 90071992547409920n; // 2^
+
+// can't add bigNr with intNr Uncaught TypeError: Cannot mix BigInt and other types
+let ans = bigNr + intNr;
+
+// Symbols are used to check when variables are different, introduced in ecmascript 2016
+let str1 = "JavaScript is fun!";
+let str2 = "JavaScript is fun!";
+console.log("These two strings are the same:", str1 === str2); // true
+let sym1 = Symbol("JavaScript is fun!");
+let sym2 = Symbol("JavaScript is fun!");
+console.log("These two Symbols are the same:", sym1 === sym2); // false
+
+// undefined datatype 
+let unassigned; 
+console.log(unassigned); // undefined
+
+let unassigned = undefined; // bad practice
+
+// null datatype
+let empty = null;
+let terribleThingToDo = undefined;
+let lastName;
+console.log("Same undefined:", lastName === terribleThingToDo); // true
+let betterOption = null;
+console.log("Same null:", lastName === betterOption); // false
+// two explicitly defined null variables are not equal
+
+// == check for equal value, === check for equal data and value
+let x = 5;
+let y = "5";
+console.log(x == y);
+
+// != check for unequal value, !== check for unequal data and value
+let n = 5;
+let nStr = '5';
+console.log(n != nStr);
+console.log(n !== nStr);
+
